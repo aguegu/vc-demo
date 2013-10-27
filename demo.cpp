@@ -2,10 +2,6 @@
 //
 
 #include "demo.h"
-#include "CForm.h"
-#include <cstdio>
-
-#include <windows.h>
 
 int main(int argc, char* argv[])
 {

@@ -8,8 +8,8 @@ CForm::CForm() {
 	_text = "Hello, world.";
 }
 
-CForm::CForm(const std::string &title, const SMALL_RECT &box) {
-	_title = title;
+CForm::CForm(const std::string &text, const SMALL_RECT &box) {
+	_text = text;
 	_box = box;
 }
 
@@ -25,8 +25,8 @@ int CForm::waitForInput(int key) {
 	return key;
 }
 
-std::string& CForm::getTitle() {
-	return _title;
+std::string& CForm::getText() {
+	return _text;
 }
 
 void CForm::moveCursorTo(short x, short y) {
@@ -74,6 +74,6 @@ void CForm::drawBox(const SMALL_RECT &box) {
 	}
 }
 
-void CForm::showTitle() {
+void CForm::showText() {
 
 }
