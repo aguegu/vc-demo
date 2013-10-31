@@ -16,11 +16,11 @@ public:
 	std::string& getText();
 	
 	void moveCursorTo(short x, short y);
-	void drawBox(const SMALL_RECT &box);
-	static void clear(const SMALL_RECT &box, char c = ' ');
-	static void Store(const SMALL_RECT &box);
-	static void Restore(const SMALL_RECT &box);
-	static void showText();
+	void drawBorder();
+	void clear(char c = ' ');
+	// static void store(const SMALL_RECT &box);
+	// static void restore(const SMALL_RECT &box);
+	void showText();
 	static COORD getScreenSize();
 
 protected:

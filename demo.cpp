@@ -5,19 +5,20 @@
 
 int main(int argc, char* argv[])
 {
-	CForm frm;
-	
 	COORD size = CForm::getScreenSize();
 
-	SMALL_RECT x = {0, 0, size.X, size.Y}; 
-	// frm.clear(x, '*');
+	SMALL_RECT full = {0, 0, size.X, size.Y}; 
+	CForm form_main("Ä¸´°¿Ú", full);
 
-	SMALL_RECT y = {2, 1, size.X - 2, size.Y - 1}; 
-	// frm.clear(y);
-
-	frm.drawBox(x);
-	frm.drawBox(y);
-
+	SMALL_RECT sub = {2, 1, size.X - 10, size.Y - 6}; 
+	CForm form_sub("×Ó´°¿Ú", sub);
+	
+	form_main.drawBorder();
+	form_main.showText();
+	
+	form_sub.drawBorder();
+	form_sub.showText();
+	
 	Sleep(1000);
 	return 0;
 }
