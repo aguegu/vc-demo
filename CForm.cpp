@@ -3,14 +3,18 @@
 HANDLE CForm::_output = GetStdHandle(STD_OUTPUT_HANDLE);
 
 CForm::CForm() {
+	_text = "";
 	_box.Left = 0;
+	_box.Right = 4;
 	_box.Top = 0;
-	_text = "Hello, world.";
+	_box.Bottom = 2;
+	_attribute = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 }
 
 CForm::CForm(const std::string &text, const SMALL_RECT &box) {
 	_text = text;
 	_box = box;
+	_attribute = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 }
 
 CForm::~CForm() {
@@ -24,6 +28,10 @@ COORD CForm::getScreenSize() {
     int rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
     COORD size = {columns, rows};
     return size;
+}
+
+void CForm::setAttribute(WORD attribute) {
+	this->_attribute = attribute;
 }
 
 void CForm::display() {
@@ -52,38 +60,43 @@ void CForm::drawLine(char c, short x, short y, short length) {
 	char *s = (char *)malloc(sizeof(char) * (length + 1));
 	memset(s, c, length);
 	s[length] = '\0';
-	COORD coord = {x, y};
-	WriteConsoleOutputCharacter(_output, s, length, coord, NULL);	
+	
+	SetConsoleTextAttribute(_output, this->_attribute);
+ 	this->moveCursorTo(x, y);
+	WriteConsole(_output, s, length, NULL, NULL);
+
 	free(s);
 }
 
 void CForm::drawBorder() {
-	COORD coord_left_top = {_box.Left, _box.Top};
-	COORD coord_left_bottom = {_box.Left, _box.Bottom - 1};
-	COORD coord_right_top = {_box.Right - 2, _box.Top};
-	COORD coord_right_bottom = {_box.Right - 2, _box.Bottom - 1};
+	SetConsoleTextAttribute(_output, this->_attribute);
 
-	WriteConsoleOutputCharacter(_output, "©³", 2, coord_left_top, NULL);
-	WriteConsoleOutputCharacter(_output, "©·", 2, coord_right_top, NULL);
-	WriteConsoleOutputCharacter(_output, "©¿", 2, coord_right_bottom, NULL);
-	WriteConsoleOutputCharacter(_output, "©»", 2, coord_left_bottom, NULL);
+	this->moveCursorTo(_box.Left, _box.Top);
+	WriteConsole(_output, "©³", 2, NULL, NULL);
+	this->moveCursorTo(_box.Left, _box.Bottom - 1);
+	WriteConsole(_output, "©»", 2, NULL, NULL);
+	this->moveCursorTo(_box.Right - 2, _box.Top);
+	WriteConsole(_output, "©·", 2, NULL, NULL);
+	this->moveCursorTo(_box.Right - 2, _box.Bottom - 1);
+	WriteConsole(_output, "©¿", 2, NULL, NULL);
 
 	for (int x = _box.Left + 2; x < _box.Right - 2; x += 2) {
-		COORD top = {x, _box.Top};
-		COORD bottom = {x, _box.Bottom - 1};
-		WriteConsoleOutputCharacter(_output, "©¥", 2, top, NULL);
-		WriteConsoleOutputCharacter(_output, "©¥", 2, bottom, NULL);
+		this->moveCursorTo(x, _box.Top);
+		WriteConsole(_output, "©¥", 2, NULL, NULL);
+		this->moveCursorTo(x, _box.Bottom - 1);
+		WriteConsole(_output, "©¥", 2, NULL, NULL);			
 	}
 
 	for (int y = _box.Top + 1; y < _box.Bottom - 1; y++) {
-		COORD left = {_box.Left, y};
-		COORD right = {_box.Right -2, y};
-		WriteConsoleOutputCharacter(_output, "©§", 2, left, NULL);
-		WriteConsoleOutputCharacter(_output, "©§", 2, right, NULL);
+		this->moveCursorTo(_box.Left, y);
+		WriteConsole(_output, "©§", 2, NULL, NULL);	
+		this->moveCursorTo(_box.Right -2, y);
+		WriteConsole(_output, "©§", 2, NULL, NULL);		
 	}
 }
 
 void CForm::showText() {
-	COORD coord = {_box.Left + 2, _box.Top};
-	WriteConsoleOutputCharacter(_output, _text.c_str(), _text.length(), coord, NULL);
+	this->moveCursorTo(_box.Left + 2, _box.Top);
+	SetConsoleTextAttribute(_output, this->_attribute);
+	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);	
 }

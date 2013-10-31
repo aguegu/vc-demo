@@ -14,6 +14,7 @@ public:
 	virtual void display();
 	virtual int waitForInput(int key);
 	std::string& getText();
+	void setAttribute(WORD attribute);
 	
 	void moveCursorTo(short x, short y);
 	void drawBorder();
@@ -24,12 +25,14 @@ public:
 	static COORD getScreenSize();
 
 protected:
+	
+	static HANDLE _output;
 	std::string _text;
 	SMALL_RECT _box;
-	static HANDLE _output;
+	WORD _attribute;
 
 private:
-	static void drawLine(char c, short x, short y, short length);
+	void drawLine(char c, short x, short y, short length);
 };
 
 
