@@ -7,15 +7,12 @@ int main(int argc, char* argv[])
 {
 	CForm frm;
 	
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-    int columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-    int rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+	COORD size = CForm::getScreenSize();
 
-	SMALL_RECT x = {0, 0, columns, rows}; 
+	SMALL_RECT x = {0, 0, size.X, size.Y}; 
 	// frm.clear(x, '*');
 
-	SMALL_RECT y = {2, 1, columns - 2, rows - 1}; 
+	SMALL_RECT y = {2, 1, size.X - 2, size.Y - 1}; 
 	// frm.clear(y);
 
 	frm.drawBox(x);

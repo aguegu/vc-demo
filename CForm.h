@@ -21,7 +21,8 @@ public:
 	static void Store(const SMALL_RECT &box);
 	static void Restore(const SMALL_RECT &box);
 	static void showText();
-	
+	static COORD getScreenSize();
+
 protected:
 	std::string _text;
 	SMALL_RECT _box;
