@@ -9,8 +9,15 @@
 class CForm {
 public:
 	CForm();
-	CForm(const std::string &text, const COORD &location, const COORD &size);
+	CForm(const std::string &text);
+	CForm(const std::string &text, const COORD &loccation, const COORD &size);
+
 	virtual	~CForm();
+
+	void setText(const std::string &text);
+	void moveTo(const COORD &location);
+	void setSize(const COORD &size);
+
 	virtual void display();
 	virtual int waitForInput(int key);
 	std::string& getText();
@@ -34,6 +41,7 @@ protected:
 
 private:
 	void drawLine(char c, short x, short y, short length);
+	void init();
 };
 
 

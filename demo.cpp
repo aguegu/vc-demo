@@ -14,8 +14,6 @@ int main(int argc, char* argv[])
 	COORD size = {20, 5}; 
 	CForm form_sub("×Ó´°¿Ú01", point, size);
 
-	//CForm form_sub;
-	
 	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
 	form_main.clear();
 	form_main.drawBorder();

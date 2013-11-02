@@ -3,6 +3,27 @@
 HANDLE CForm::_output = GetStdHandle(STD_OUTPUT_HANDLE);
 
 CForm::CForm() {
+	this->init();
+}
+
+CForm::CForm(const std::string &text) {
+	this->init();
+	this->setText(text);	
+}
+
+CForm::CForm(const std::string &text, const COORD &location, const COORD &size) {
+	this->init();
+
+	this->setText(text);
+	this->moveTo(location);
+	this->setSize(size);
+}
+
+CForm::~CForm() {
+	
+}
+
+void CForm::init() {
 	_text = "";
 
 	_location.X = 0;
@@ -10,19 +31,20 @@ CForm::CForm() {
 
 	_size.X = 1;
 	_size.Y = 1;
-	
+
 	_attribute = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 }
 
-CForm::CForm(const std::string &text, const COORD &location, const COORD &size) {
+void CForm::setText(const std::string &text) {
 	_text = text;
-	_location = location;
-	_size = size;
-	_attribute = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
 }
 
-CForm::~CForm() {
+void CForm::moveTo(const COORD &location) {
+	_location = location;
+}
 
+void CForm::setSize(const COORD &size) {
+	_size = size;
 }
 
 COORD CForm::getScreenSize() {
