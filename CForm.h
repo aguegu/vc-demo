@@ -9,7 +9,7 @@
 class CForm {
 public:
 	CForm();
-	CForm(const std::string &text, const SMALL_RECT &box);
+	CForm(const std::string &text, const COORD &location, const COORD &size);
 	virtual	~CForm();
 	virtual void display();
 	virtual int waitForInput(int key);
@@ -28,7 +28,8 @@ protected:
 	
 	static HANDLE _output;
 	std::string _text;
-	SMALL_RECT _box;
+	COORD _location;
+	COORD _size;
 	WORD _attribute;
 
 private:

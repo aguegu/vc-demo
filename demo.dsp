@@ -100,6 +100,10 @@ SOURCE=.\CForm.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CLabel.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\demo.cpp
 
 !IF  "$(CFG)" == "demo - Win32 Release"
@@ -133,6 +137,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\CForm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CLabel.h
 # End Source File
 # Begin Source File
 
