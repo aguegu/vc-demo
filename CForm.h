@@ -28,20 +28,21 @@ public:
 	void clear(char c = ' ');
 	// static void store(const SMALL_RECT &box);
 	// static void restore(const SMALL_RECT &box);
-	void showText();
+	void showTitle();
 	static COORD getScreenSize();
 
 protected:
-	
+	void showText();
+
+private:
+	void drawLine(char c, short x, short y, short length);
+	void init();
+
 	static HANDLE _output;
 	std::string _text;
 	COORD _location;
 	COORD _size;
 	WORD _attribute;
-
-private:
-	void drawLine(char c, short x, short y, short length);
-	void init();
 };
 
 

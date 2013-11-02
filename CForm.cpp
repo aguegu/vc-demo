@@ -60,10 +60,6 @@ void CForm::setAttribute(WORD attribute) {
 	this->_attribute = attribute;
 }
 
-void CForm::display() {
-
-}
-
 int CForm::waitForInput(int key) {
 	return key;
 }
@@ -125,8 +121,18 @@ void CForm::drawBorder() {
 	}
 }
 
-void CForm::showText() {
-	this->moveCursorTo(2, 0);
+void CForm::showText() {	
 	SetConsoleTextAttribute(_output, this->_attribute);
 	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);
+}
+
+void CForm::showTitle() {
+	this->moveCursorTo(2, 0);
+	this->showText();
+}
+
+void CForm::display() {
+	this->clear();
+	this->drawBorder();
+	this->showTitle();
 }

@@ -9,22 +9,26 @@ int main(int argc, char* argv[])
 	COORD zero = {0, 0};
 
 	CForm form_main("主窗口", zero, full_size);
-
+	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
+	form_main.display();
+	
 	COORD point = {2, 3};
 	COORD size = {20, 5}; 
 	CForm form_sub("子窗口01", point, size);
 
-	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
-	form_main.clear();
-	form_main.drawBorder();
-	form_main.showText();
-	
 	form_sub.setAttribute(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_INTENSITY);
-	form_sub.clear();
-	form_sub.drawBorder();
-	form_sub.showText();
+	form_sub.display();
+
+	COORD label = {30, 20};
+	CLabel x("hello");
+	x.moveTo(label);
 	
-	Sleep(5000);
+	x.clear();
+	x.display();
+	
+
+
+	Sleep(1000);
 	return 0;
 }
 

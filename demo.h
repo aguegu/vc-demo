@@ -4,5 +4,6 @@
 #include <cstdio>
 #include <windows.h>
 #include "CForm.h"
+#include "CLabel.h"
 
 #endif
