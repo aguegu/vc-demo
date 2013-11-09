@@ -5,5 +5,6 @@
 #include <windows.h>
 #include "CForm.h"
 #include "CLabel.h"
+#include "CButton.h"
 
 #endif

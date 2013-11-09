@@ -33,15 +33,16 @@ public:
 
 protected:
 	void showText();
+	COORD _size;
+	std::string _text;
 
 private:
 	void drawLine(char c, short x, short y, short length);
 	void init();
 
 	static HANDLE _output;
-	std::string _text;
-	COORD _location;
-	COORD _size;
+	
+	COORD _location;	
 	WORD _attribute;
 };
 

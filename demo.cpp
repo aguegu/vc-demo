@@ -20,13 +20,16 @@ int main(int argc, char* argv[])
 	form_sub.display();
 
 	COORD label = {30, 20};
-	CLabel x("hello");
+	CLabel x("hello", 8);
 	x.moveTo(label);
-	
-	x.clear();
 	x.display();
-	
 
+	COORD button_position = {28, 16};
+	CButton button("ok", 8);
+	button.moveTo(button_position);
+	button.display();
+	
+	
 
 	Sleep(1000);
 	return 0;
