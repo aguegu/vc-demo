@@ -11,28 +11,25 @@ void init() {
 	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
 	form_main.display();
 	
-	COORD point = {2, 3};
-	COORD size = {20, 5}; 
-	CForm form_sub("×Ó´°¿Ú01", point, size);
-
-	form_sub.setAttribute(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_INTENSITY);
-	form_sub.display();
-
 	COORD label = {30, 20};
 	CLabel x("hello", 8);
 	x.moveTo(label);
 	x.display();
 
-	COORD ok_position = {24, 16};
+	COORD position_ok = {12, 16};
 	CButton button_ok("ok", 8);
-	button_ok.moveTo(ok_position);
+	button_ok.moveTo(position_ok);
 	button_ok.getFocus();
 
-	COORD cancel_position = {40, 16};
+	COORD position_cancel = {24, 16};
 	CButton button_cancel("cancel", 8);
-	button_cancel.setAttribute(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_BLUE);
-	button_cancel.moveTo(cancel_position);
+	button_cancel.moveTo(position_cancel);
 	button_cancel.display();
+
+	COORD position_exit = {36, 16};
+	CButton button_exit("exit", 8);
+	button_exit.moveTo(position_exit);
+	button_exit.display();
 }
 
 int main(int argc, char* argv[])
