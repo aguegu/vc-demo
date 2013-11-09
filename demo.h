@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <windows.h>
+#include <conio.h>
 #include "CForm.h"
 #include "CLabel.h"
 #include "CButton.h"

@@ -8,7 +8,8 @@ public:
 	CButton(const std::string &text);
 	CButton(const std::string &text, short length);
 	virtual ~CButton();
-	void display();
+	void display();	
+	void getFocus();
 };
 
 #endif 

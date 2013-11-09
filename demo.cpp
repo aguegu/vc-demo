@@ -3,8 +3,7 @@
 
 #include "demo.h"
 
-int main(int argc, char* argv[])
-{
+void init() {
 	COORD full_size = CForm::getScreenSize();
 	COORD zero = {0, 0};
 
@@ -24,14 +23,28 @@ int main(int argc, char* argv[])
 	x.moveTo(label);
 	x.display();
 
-	COORD button_position = {28, 16};
-	CButton button("ok", 8);
-	button.moveTo(button_position);
-	button.display();
-	
-	
+	COORD ok_position = {24, 16};
+	CButton button_ok("ok", 8);
+	button_ok.moveTo(ok_position);
+	button_ok.getFocus();
 
-	Sleep(1000);
+	COORD cancel_position = {40, 16};
+	CButton button_cancel("cancel", 8);
+	button_cancel.setAttribute(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_BLUE);
+	button_cancel.moveTo(cancel_position);
+	button_cancel.display();
+}
+
+int main(int argc, char* argv[])
+{
+	//init();
+	int x;
+	while ((x = _getch()) != 0x1b)
+		printf("0x%02x\n", x);
+
+
+	//Sleep(1000);
 	return 0;
 }
+
 

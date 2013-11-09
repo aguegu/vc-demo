@@ -56,6 +56,10 @@ COORD CForm::getScreenSize() {
     return size;
 }
 
+void CForm::setOutputAttribute(WORD attribute) {
+	SetConsoleTextAttribute(_output, attribute);
+}
+
 void CForm::setAttribute(WORD attribute) {
 	this->_attribute = attribute;
 }
@@ -95,8 +99,6 @@ void CForm::drawLine(char c, short x, short y, short length) {
 }
 
 void CForm::drawBorder() {
-	SetConsoleTextAttribute(_output, this->_attribute);
-
 	this->moveCursorTo(0, 0);
 	WriteConsole(_output, "©³", 2, NULL, NULL);
 	this->moveCursorTo(0, _size.Y - 1);
@@ -122,7 +124,6 @@ void CForm::drawBorder() {
 }
 
 void CForm::showText() {	
-	SetConsoleTextAttribute(_output, this->_attribute);
 	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);
 }
 
@@ -132,7 +133,12 @@ void CForm::showTitle() {
 }
 
 void CForm::display() {
+	this->applyAttribute();
 	this->clear();
 	this->drawBorder();
 	this->showTitle();
 }
+
+void CForm::applyAttribute() {
+	CForm::setOutputAttribute(this->_attribute);
+}	
