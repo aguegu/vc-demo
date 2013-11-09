@@ -87,6 +87,10 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\CButton.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CForm.cpp
 
 !IF  "$(CFG)" == "demo - Win32 Release"
@@ -101,6 +105,10 @@ SOURCE=.\CForm.cpp
 # Begin Source File
 
 SOURCE=.\CLabel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\CText.cpp
 # End Source File
 # Begin Source File
 
@@ -136,11 +144,19 @@ SOURCE=.\StdAfx.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\CButton.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\CForm.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\CLabel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CText.h
 # End Source File
 # Begin Source File
 

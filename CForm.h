@@ -28,14 +28,13 @@ public:
 	void clear(char c = ' ');
 	// static void store(const SMALL_RECT &box);
 	// static void restore(const SMALL_RECT &box);
-	void showTitle();
 	static COORD getScreenSize();
 	static void setOutputAttribute(WORD attribute);
 
 protected:	
 	void showText();
 	void applyAttribute();
-	
+
 	COORD _size;
 	std::string _text;
 

@@ -37,14 +37,17 @@ void init() {
 
 int main(int argc, char* argv[])
 {
-	//init();
+	init();
 	int x;
-	while ((x = _getch()) != 0x1b)
-		printf("0x%02x\n", x);
+	while ((x = _getch()) != 0x1b) {
+		if (x == 0 || x == 0xe0) {
+			x <<= 8;
+			x += _getch();
+		}
+		printf("0x%02X\n", x);
+	}
 
-
-	//Sleep(1000);
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 

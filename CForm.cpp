@@ -127,16 +127,12 @@ void CForm::showText() {
 	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);
 }
 
-void CForm::showTitle() {
-	this->moveCursorTo(2, 0);
-	this->showText();
-}
-
 void CForm::display() {
 	this->applyAttribute();
 	this->clear();
 	this->drawBorder();
-	this->showTitle();
+	this->moveCursorTo(2, 0);
+	this->showText();
 }
 
 void CForm::applyAttribute() {
