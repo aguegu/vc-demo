@@ -24,10 +24,26 @@ void CButton::display() {
 	this->showText();
 }
 
-void CButton::getFocus() {
-	this->setAttribute(FOREGROUND_BLUE | BACKGROUND_INTENSITY);
+int CButton::getFocus() {
+	CForm::setConsoleAttribute(FOREGROUND_BLUE | BACKGROUND_INTENSITY);
 	this->clear();
 	this->drawBorder();
 	this->moveCursorTo((_size.X - _text.length()) / 2, 1);
 	this->showText();
+
+	while (int key = CForm::getKeyInput()) {
+		switch (key) {
+		case KEY_TAB:
+		case KEY_UP:
+		case KEY_DOWN:
+		case KEY_LEFT:
+		case KEY_RIGHT:
+		case KEY_ENTER:
+		case KEY_ESC:
+			this->display();
+			return key;
+		}
+	}
+
+	return 0;
 }

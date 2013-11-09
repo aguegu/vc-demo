@@ -8,7 +8,7 @@ CForm::CForm() {
 
 CForm::CForm(const std::string &text) {
 	this->init();
-	this->setText(text);	
+	this->setText(text);
 }
 
 CForm::CForm(const std::string &text, const COORD &location, const COORD &size) {
@@ -20,7 +20,7 @@ CForm::CForm(const std::string &text, const COORD &location, const COORD &size) 
 }
 
 CForm::~CForm() {
-	
+
 }
 
 void CForm::init() {
@@ -56,7 +56,7 @@ COORD CForm::getScreenSize() {
     return size;
 }
 
-void CForm::setOutputAttribute(WORD attribute) {
+void CForm::setConsoleAttribute(WORD attribute) {
 	SetConsoleTextAttribute(_output, attribute);
 }
 
@@ -64,8 +64,8 @@ void CForm::setAttribute(WORD attribute) {
 	this->_attribute = attribute;
 }
 
-int CForm::waitForInput(int key) {
-	return key;
+int CForm::getFocus() {
+	return 0;
 }
 
 std::string& CForm::getText() {
@@ -90,8 +90,7 @@ void CForm::drawLine(char c, short x, short y, short length) {
 
 	char *s = (char *)malloc(sizeof(char) * length);
 	memset(s, c, length);
-	
-	SetConsoleTextAttribute(_output, this->_attribute);
+
  	this->moveCursorTo(x, y);
 	WriteConsole(_output, s, length, NULL, NULL);
 
@@ -112,18 +111,18 @@ void CForm::drawBorder() {
 		this->moveCursorTo(x, 0);
 		WriteConsole(_output, "©¥", 2, NULL, NULL);
 		this->moveCursorTo(x, _size.Y - 1);
-		WriteConsole(_output, "©¥", 2, NULL, NULL);			
+		WriteConsole(_output, "©¥", 2, NULL, NULL);
 	}
 
 	for (int y = 1; y < _size.Y - 1; y++) {
 		this->moveCursorTo(0, y);
-		WriteConsole(_output, "©§", 2, NULL, NULL);	
+		WriteConsole(_output, "©§", 2, NULL, NULL);
 		this->moveCursorTo(_size.X -2, y);
-		WriteConsole(_output, "©§", 2, NULL, NULL);		
+		WriteConsole(_output, "©§", 2, NULL, NULL);
 	}
 }
 
-void CForm::showText() {	
+void CForm::showText() {
 	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);
 }
 
@@ -136,5 +135,17 @@ void CForm::display() {
 }
 
 void CForm::applyAttribute() {
-	CForm::setOutputAttribute(this->_attribute);
-}	
+	CForm::setConsoleAttribute(this->_attribute);
+}
+
+int CForm::getKeyInput() {
+	int key;
+	key = _getch();
+
+	if (key == 0 || key == 0xe0) {
+		key <<= 8;
+		key += _getch();
+	}
+
+	return key;
+}

@@ -5,6 +5,15 @@
 #include <iostream>
 #include <windows.h>
 #include <assert.h>
+#include <conio.h>
+
+#define KEY_TAB	(0x09)
+#define KEY_ESC (0x1b)
+#define KEY_ENTER	 (0x0d)
+#define KEY_UP	(0xe048)
+#define KEY_LEFT	(0xe04b)
+#define KEY_RIGHT	(0xe04d)
+#define KEY_DOWN	(0xe050)
 
 class CForm {
 public:
@@ -19,7 +28,7 @@ public:
 	void setSize(const COORD &size);
 
 	virtual void display();
-	virtual int waitForInput(int key);
+	virtual int getFocus();
 	std::string& getText();
 	void setAttribute(WORD attribute);
 
@@ -29,7 +38,8 @@ public:
 	// static void store(const SMALL_RECT &box);
 	// static void restore(const SMALL_RECT &box);
 	static COORD getScreenSize();
-	static void setOutputAttribute(WORD attribute);
+	static void setConsoleAttribute(WORD attribute);
+	static int getKeyInput();
 
 protected:
 	void showText();
