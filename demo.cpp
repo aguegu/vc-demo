@@ -7,12 +7,17 @@ typedef struct {
 	COORD Coord;
 	char *Text;
 	short Length;
-} ButtonAttribute ;
+} ControlAttribute ;
 
-static ButtonAttribute button_attributes[3] = {
-	{{12, 16}, "login", 8},
-	{{24, 16}, "cancel", 8},
-	{{36, 16}, "exit", 8},
+static ControlAttribute button_attributes[3] = {
+	{{6, 16}, "login", 8},
+	{{18, 16}, "cancel", 8},
+	{{30, 16}, "exit", 8},
+};
+
+static ControlAttribute label_attributes[2] = {
+	{{6, 4}, "username:", 0},
+	{{6, 6}, "password:", 0},
 };
 
 static std::vector<CForm *> controls;
@@ -21,22 +26,31 @@ static int focus_on = 0;
 void init() {
 	COORD full_size = CForm::getScreenSize();
 	COORD zero = {0, 0};
+	int i;
 
 	CForm form_main("Ö÷´°¿Ú", zero, full_size);
 	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
 	form_main.display();
 
-	COORD label = {30, 20};
-	CLabel x("hello", 8);
-	x.moveTo(label);
-	x.display();
+	COORD x = {16, 4};
+	CText *txt = new CText(16);
+	txt->moveTo(x);
+	txt->display();
 
-	for (int i = 0; i < 3; i++) {
+	for (i = 0; i < 2; i++) {
+		CLabel x(label_attributes[i].Text);
+		x.moveTo(label_attributes[i].Coord);
+		x.display();
+	}
+
+	for (i = 0; i < 3; i++) {
 		CButton *button = new CButton(button_attributes[i].Text, button_attributes[i].Length);
 		button->moveTo(button_attributes[i].Coord);
 		button->display();
-		controls.push_back(button);		
+		controls.push_back(button);
 	}
+
+	controls.push_back(txt);
 }
 
 void teardown() {
@@ -46,10 +60,10 @@ void teardown() {
 
 int main(int argc, char* argv[])
 {
-	init();	
-	
+	init();
+
 	while (1) {
-		int key = controls[focus_on]->getFocus();	
+		int key = controls[focus_on]->getFocus();
 
 		switch (key) {
 		case KEY_UP:

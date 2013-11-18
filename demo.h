@@ -9,5 +9,6 @@
 #include "CForm.h"
 #include "CLabel.h"
 #include "CButton.h"
+#include "CText.h"
 
 #endif
