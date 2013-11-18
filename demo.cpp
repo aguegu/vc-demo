@@ -55,15 +55,15 @@ int main(int argc, char* argv[])
 		case KEY_UP:
 		case KEY_LEFT:
 		case KEY_TAB:
-			focus_on = (focus_on + 2) % 3;
+			focus_on = (focus_on + controls.size() - 1) % controls.size();
 			break;
 		case KEY_DOWN:
 		case KEY_RIGHT:
-			focus_on = (focus_on + 1) % 3;
+			focus_on = (focus_on + 1) % controls.size();
 			break;
 		}
 
-		if (focus_on == 0 && key == KEY_ENTER)
+		if (focus_on == 2 && key == KEY_ENTER)
 			break;
 	}
 
