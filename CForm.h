@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <conio.h>
 
+#define KEY_BACKSPACE (0x08)
 #define KEY_TAB	(0x09)
 #define KEY_ESC (0x1b)
 #define KEY_ENTER	 (0x0d)

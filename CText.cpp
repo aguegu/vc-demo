@@ -13,30 +13,41 @@ CText::~CText() {
 
 void CText::display() {
 	this->applyAttribute();
-	this->clear();
-	this->moveCursorTo(0, 0);
-	this->showText();
+	this->refresh();
 }
 
 int CText::getFocus() {
 	CForm::setConsoleAttribute(FOREGROUND_BLUE | BACKGROUND_INTENSITY);
-	this->clear();
+
+	this->refresh();
 	this->moveCursorTo(_text.length(), 0);
-	this->showText();
 
 	while (int key = CForm::getKeyInput()) {
 		switch (key) {
-		case KEY_TAB:
-		case KEY_UP:
-		case KEY_DOWN:
-		case KEY_LEFT:
-		case KEY_RIGHT:
-		case KEY_ENTER:
-		case KEY_ESC:
-			this->display();
-			return key;
+			case KEY_TAB:
+			case KEY_UP:
+			case KEY_DOWN:
+			case KEY_LEFT:
+			case KEY_RIGHT:
+			case KEY_ENTER:
+			case KEY_ESC:
+				this->display();
+				return key;
 		}
+
+		if (isprint(key))
+			this->setText(_text.append(1, (char)key));
+		else if (key == KEY_BACKSPACE && _text.length() > 0)
+			this->setText(_text.erase(_text.length() - 1));
+
+		this->refresh();
 	}
 
 	return 0;
+}
+
+void CText::refresh() {
+	this->clear();
+	this->moveCursorTo(0, 0);
+	this->showText();
 }

@@ -20,6 +20,12 @@ static ControlAttribute label_attributes[2] = {
 	{{6, 6}, "password:", 0},
 };
 
+static ControlAttribute text_attributes[2] = {
+	{{16, 4}, "", 16},
+	{{16, 6}, "", 16},
+};
+
+
 static std::vector<CForm *> controls;
 static int focus_on = 0;
 
@@ -31,11 +37,6 @@ void init() {
 	CForm form_main("Ö÷´°¿Ú", zero, full_size);
 	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
 	form_main.display();
-
-	COORD x = {16, 4};
-	CText *txt = new CText(16);
-	txt->moveTo(x);
-	txt->display();
 
 	for (i = 0; i < 2; i++) {
 		CLabel x(label_attributes[i].Text);
@@ -50,7 +51,12 @@ void init() {
 		controls.push_back(button);
 	}
 
-	controls.push_back(txt);
+	for (i = 0; i < 2; i++) {
+		CText *text = new CText(text_attributes[i].Length);
+		text->moveTo(text_attributes[i].Coord);
+		text->display();
+		controls.push_back(text);
+	}
 }
 
 void teardown() {
@@ -79,6 +85,11 @@ int main(int argc, char* argv[])
 
 		if (focus_on == 2 && key == KEY_ENTER)
 			break;
+
+		// int key = CForm::getKeyInput();
+		// printf("0x%02x\r\n", key);
+		// if (key == KEY_ENTER)
+		// 	break;
 	}
 
 	teardown();

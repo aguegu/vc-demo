@@ -9,6 +9,8 @@ public:
 	virtual ~CText();
 	void display();
 	int getFocus();
+private:
+	void refresh();
 };
 
 #endif
