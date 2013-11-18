@@ -108,6 +108,10 @@ SOURCE=.\CLabel.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\CPassword.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\CText.cpp
 # End Source File
 # Begin Source File
@@ -153,6 +157,10 @@ SOURCE=.\CForm.h
 # Begin Source File
 
 SOURCE=.\CLabel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\CPassword.h
 # End Source File
 # Begin Source File
 

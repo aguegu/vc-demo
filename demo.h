@@ -10,5 +10,6 @@
 #include "CLabel.h"
 #include "CButton.h"
 #include "CText.h"
+#include "CPassword.h"
 
 #endif

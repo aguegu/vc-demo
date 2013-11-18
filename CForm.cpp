@@ -122,8 +122,12 @@ void CForm::drawBorder() {
 	}
 }
 
+void CForm::writeConsole(std::string str) {
+	WriteConsole(_output, str.c_str(), str.length(), NULL, NULL);
+}
+
 void CForm::showText() {
-	WriteConsole(_output, _text.c_str(), _text.length(), NULL, NULL);
+	CForm::writeConsole(_text);
 }
 
 void CForm::display() {

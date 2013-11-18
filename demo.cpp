@@ -44,6 +44,17 @@ void init() {
 		x.display();
 	}
 
+	CText *text = new CText(text_attributes[0].Length);
+	text->moveTo(text_attributes[0].Coord);
+	text->display();
+	controls.push_back(text);
+
+	CPassword *password = new CPassword(text_attributes[1].Length);
+	password->moveTo(text_attributes[1].Coord);
+	password->display();
+	controls.push_back(password);
+	
+
 	for (i = 0; i < 3; i++) {
 		CButton *button = new CButton(button_attributes[i].Text, button_attributes[i].Length);
 		button->moveTo(button_attributes[i].Coord);
@@ -51,12 +62,7 @@ void init() {
 		controls.push_back(button);
 	}
 
-	for (i = 0; i < 2; i++) {
-		CText *text = new CText(text_attributes[i].Length);
-		text->moveTo(text_attributes[i].Coord);
-		text->display();
-		controls.push_back(text);
-	}
+
 }
 
 void teardown() {
@@ -83,10 +89,14 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		if (focus_on == 2 && key == KEY_ENTER)
-			break;
+		if (key == KEY_ENTER)
+			if (focus_on == 4)
+				break;
+			else if (focus_on == 2) {
+				printf("\r\n\r\n%s | %s", controls[0]->getText().c_str(), controls[1]->getText().c_str());
+			}
 
-		// int key = CForm::getKeyInput();
+			// int key = CForm::getKeyInput();
 		// printf("0x%02x\r\n", key);
 		// if (key == KEY_ENTER)
 		// 	break;

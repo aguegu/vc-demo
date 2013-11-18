@@ -41,11 +41,11 @@ public:
 	static COORD getScreenSize();
 	static void setConsoleAttribute(WORD attribute);
 	static int getKeyInput();
+	static void writeConsole(std::string str);
 
 protected:
-	void showText();
+	virtual void showText();
 	void applyAttribute();
-
 
 	COORD _size;
 	std::string _text;
