@@ -9,15 +9,14 @@ typedef struct {
 	short Length;
 } ControlAttribute ;
 
-static ControlAttribute button_attributes[3] = {
-	{{6, 16}, "login", 8},
-	{{18, 16}, "cancel", 8},
-	{{30, 16}, "exit", 8},
+static ControlAttribute button_attributes[2] = {
+	{{6, 16}, "登录", 8},
+	{{18, 16}, "退出", 8},
 };
 
 static ControlAttribute label_attributes[2] = {
-	{{6, 4}, "username:", 0},
-	{{6, 6}, "password:", 0},
+	{{6, 4}, "姓名:", 0},
+	{{6, 6}, "密码:", 0},
 };
 
 static ControlAttribute text_attributes[2] = {
@@ -34,7 +33,7 @@ void init() {
 	COORD zero = {0, 0};
 	int i;
 
-	CForm form_main("主窗口", zero, full_size);
+	CForm form_main("登录界面", zero, full_size);
 	form_main.setAttribute(FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE);
 	form_main.display();
 
@@ -54,8 +53,7 @@ void init() {
 	password->display();
 	controls.push_back(password);
 	
-
-	for (i = 0; i < 3; i++) {
+	for (i = 0; i < 2; i++) {
 		CButton *button = new CButton(button_attributes[i].Text, button_attributes[i].Length);
 		button->moveTo(button_attributes[i].Coord);
 		button->display();
@@ -66,7 +64,7 @@ void init() {
 }
 
 void teardown() {
-	for (int i = 0; i< 3; i++)
+	for (int i = 0; i< controls.size(); i++)
 		free(controls[i]);
 }
 
@@ -90,7 +88,7 @@ int main(int argc, char* argv[])
 		}
 
 		if (key == KEY_ENTER)
-			if (focus_on == 4)
+			if (focus_on == 3)
 				break;
 			else if (focus_on == 2) {
 				printf("\r\n\r\n%s | %s", controls[0]->getText().c_str(), controls[1]->getText().c_str());
